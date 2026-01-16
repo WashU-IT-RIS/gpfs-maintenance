@@ -1,7 +1,7 @@
 
 WORKSPACE=$(pwd)
 
-set -euo pipefail
+#set -euo pipefail
 
 PERL_PREFIX="$WORKSPACE/.perl"
 

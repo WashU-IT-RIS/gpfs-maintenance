@@ -16,7 +16,7 @@ GetOptions (
 
 die "Specify filesystem with --filesystem" unless $filesystem;
 
-my $err
+my $err;
 
 my $pid = open3(my $chld_in, my $chld_out, my $chld_err = gensym,
     'mmlssnapshot', $filesystem);
