@@ -26,5 +26,10 @@ my @stderr = <$chld_err>;
 
 waitpid($pid, 0);
 
-print Dumper(\@stdout);
+#print Dumper(\@stdout);
+
+my @daily = map { (split)[0] } grep { /^\d{8}-/ } @stdout;
+my @global = map { (split)[0] } grep { /^\Q$filesystem\E\./ } @stdout;
+
+print Dumper({ daily => \@daily, global => \@global });
 
