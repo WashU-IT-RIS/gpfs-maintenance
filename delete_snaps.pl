@@ -33,3 +33,24 @@ my @global = map { (split)[0] } grep { /^\Q$filesystem\E\./ } @stdout;
 
 print Dumper({ daily => \@daily, global => \@global });
 
+my $date = UnixDate(DateCalc('today', "-$days days", "%Y%m%d"));
+
+printf "Cutoff date is %s\n", $date;
+
+foreach my $snap (@daily) {
+    if ($snap lt $date) {
+        printf "Want to delete %s\n", $snap;
+    }
+    else {
+        printf "Want to KEEP %s\n", $snap;
+    }
+}
+
+# keep one global, kill the rest.
+pop @global;
+
+foreach my $snap (@global) {
+    printf "Want to delete %s\n", $snap;
+}
+
+
