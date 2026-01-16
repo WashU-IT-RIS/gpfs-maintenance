@@ -6,5 +6,5 @@ set -x
 
 perl -cw delete_snaps.pl || exit 1
 
-./delete_snaps.pl "$@"
+exec ./delete_snaps.pl "$@"
 
