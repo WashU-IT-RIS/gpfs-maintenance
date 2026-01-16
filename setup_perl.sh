@@ -21,4 +21,3 @@ curl -fsSL https://cpanmin.us | perl - --local-lib="$PERL_PREFIX" App::cpanminus
 
 cpanm --notest --local-lib="$PERL_PREFIX" --installdeps .
 
-

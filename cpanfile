@@ -1,5 +1,4 @@
 
-requires 'JSON';
-requires 'LWP::UserAgent';
-requires 'Try::Tiny';
+requires 'Date::Manip';
+requires 'Getopt::Long';
 
