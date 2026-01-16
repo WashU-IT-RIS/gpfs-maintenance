@@ -7,6 +7,8 @@ FILESYSTEM=$1; shift
 
 . setup_perl.sh
 
+perl -cw perl_test.pl
+
 exit 0
 
 PERL_IMAGE=ghcr.io/washu-it-ris/ubuntu-perl:master
