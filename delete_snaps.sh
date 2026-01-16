@@ -5,7 +5,9 @@ set -x
 # pass filesystem name
 FILESYSTEM=$1; shift
 
-. docker_setup.sh
+. setup_perl.sh
+
+exit 0
 
 PERL_IMAGE=ghcr.io/washu-it-ris/ubuntu-perl:master
 
