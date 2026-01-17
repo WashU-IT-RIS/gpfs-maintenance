@@ -42,6 +42,9 @@ my $date = UnixDate( DateCalc('today', "-$days days"), "%Y%m%d");
 printf "Days is %s\n", $days;
 printf "Cutoff date is %s\n", $date;
 
+print "Deleting daily snapshots\n";
+my $daily_deleted = 0;
+
 foreach my $snap (@daily) {
 
     my ($snapdate, $fileset) = split /-/, $snap, 2;
@@ -49,14 +52,22 @@ foreach my $snap (@daily) {
     if ($snapdate lt $date) {
         printf "Want to delete %s\n", $snap;
         system('mmdelsnapshot', $filesystem, sprintf("%s:%s", $fileset, $snap));
+        my $rc = $? >> 8;
+        printf "RC=%s\n", $rc;
+        $daily_deleted++;
     }
 }
+printf "Deleted %s daily snapshots\n";
+
+print "Deleting global snapshots\n";
+my $global_deleted = 0;
 
 # remove the last global
 pop @global;
 
 foreach my $snap (@global) {
     printf "Want to delete %s\n", $snap;
+    $global_deleted++;
 }
-
+printf "Deleted %s global snapshots\n", $global_deleted;
 
