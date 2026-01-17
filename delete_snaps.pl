@@ -37,6 +37,8 @@ my @global = map { (split)[0] } grep { /^\Q$filesystem\E\./ } @stdout;
 
 my $date = UnixDate( DateCalc('today', "-$days days"), "%Y%m%d");
 
+system('mmlspool', '--block-size', 'auto', $filesystem);
+
 printf "Days is %s\n", $days;
 printf "Cutoff date is %s\n", $date;
 
@@ -78,4 +80,6 @@ foreach my $snap (@global) {
     }
 }
 printf "Deleted %s global snapshots\n", $global_deleted;
+
+system('mmlspool', '--block-size', 'auto', $filesystem);
 
