@@ -57,7 +57,7 @@ foreach my $snap (@daily) {
         $daily_deleted++;
     }
 }
-printf "Deleted %s daily snapshots\n";
+printf "Deleted %s daily snapshots\n", $daily_deleted;
 
 print "Deleting global snapshots\n";
 my $global_deleted = 0;
