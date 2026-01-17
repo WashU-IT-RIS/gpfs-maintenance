@@ -32,7 +32,7 @@ my @stderr = <$chld_err>;
 
 waitpid($pid, 0);
 
-my @daily = sort { $a cmp $b } map { (split)[0] } grep { /^\d{8}-/ } @stdout;
+my @daily = sort { lc($a) cmp lc($b) } map { (split)[0] } grep { /^\d{8}-/ } @stdout;
 my @global = map { (split)[0] } grep { /^\Q$filesystem\E\./ } @stdout;
 
 my $date = UnixDate( DateCalc('today', "-$days days"), "%Y%m%d");
