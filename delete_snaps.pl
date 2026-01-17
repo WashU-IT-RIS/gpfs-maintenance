@@ -6,10 +6,14 @@ use Getopt::Long;
 use IPC::Open3;
 use Symbol 'gensym';
 
+use strict;
+
 # parse command-line options
 my $filesystem;
 my $verbose;
+my $days = 8;
 GetOptions (
+    "days=i"       => \$days,
     "filesystem=s" => \$filesystem,
     "verbose"      => \$verbose,
     ) or die("Error in command line arguments\n");
