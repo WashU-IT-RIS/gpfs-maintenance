@@ -43,15 +43,16 @@ printf "Days is %s\n", $days;
 printf "Cutoff date is %s\n", $date;
 
 foreach my $snap (@daily) {
-    if ($snap lt $date) {
+
+    my ($snapdate, $fileset) = split /-/, $snap, 2;
+
+    if ($snapdate lt $date) {
         printf "Want to delete %s\n", $snap;
-    }
-    else {
-        printf "Want to KEEP %s\n", $snap;
+        system('mmdelsnapshot', $filesystem, sprintf("%s:%s", $fileset, $snap));
     }
 }
 
-# keep one global, kill the rest.
+# remove the last global
 pop @global;
 
 foreach my $snap (@global) {
