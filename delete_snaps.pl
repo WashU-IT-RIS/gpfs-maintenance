@@ -37,7 +37,7 @@ my @global = map { (split)[0] } grep { /^\Q$filesystem\E\./ } @stdout;
 
 #print Dumper({ daily => \@daily, global => \@global });
 
-my $date = UnixDate(DateCalc('today', "-$days days", "%Y%m%d"));
+my $date = UnixDate( DateCalc('today', "-$days days"), "%Y%m%d");
 
 printf "Days is %s\n", $days;
 printf "Cutoff date is %s\n", $date;
