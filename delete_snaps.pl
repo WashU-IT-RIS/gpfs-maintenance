@@ -12,10 +12,12 @@ use strict;
 my $filesystem;
 my $verbose;
 my $days = 8;
+my $notreally = 0;
 GetOptions (
     "days=i"       => \$days,
     "filesystem=s" => \$filesystem,
     "verbose"      => \$verbose,
+    "notreally"    => \$notreally,
     ) or die("Error in command line arguments\n");
 
 die "Specify filesystem with --filesystem" unless $filesystem;
@@ -30,12 +32,8 @@ my @stderr = <$chld_err>;
 
 waitpid($pid, 0);
 
-#print Dumper(\@stdout);
-
 my @daily = map { (split)[0] } grep { /^\d{8}-/ } @stdout;
 my @global = map { (split)[0] } grep { /^\Q$filesystem\E\./ } @stdout;
-
-#print Dumper({ daily => \@daily, global => \@global });
 
 my $date = UnixDate( DateCalc('today', "-$days days"), "%Y%m%d");
 
@@ -50,11 +48,16 @@ foreach my $snap (@daily) {
     my ($snapdate, $fileset) = split /-/, $snap, 2;
 
     if ($snapdate lt $date) {
-        printf "Want to delete %s\n", $snap;
-        system('mmdelsnapshot', $filesystem, sprintf("%s:%s", $fileset, $snap));
-        my $rc = $? >> 8;
-        printf "RC=%s\n", $rc;
-        $daily_deleted++;
+        if ($notreally) {
+            printf "Skipping %s\n", $snap;
+        }
+        else {
+            printf "Deleting %s\n", $snap;
+            system('mmdelsnapshot', $filesystem, sprintf("%s:%s", $fileset, $snap));
+            my $rc = $? >> 8;
+            printf "RC=%s\n", $rc;
+            $daily_deleted++;
+        }
     }
 }
 printf "Deleted %s daily snapshots\n", $daily_deleted;
@@ -66,8 +69,13 @@ my $global_deleted = 0;
 pop @global;
 
 foreach my $snap (@global) {
-    printf "Want to delete %s\n", $snap;
-    $global_deleted++;
+    if ($notreally) {
+        printf "Skipping %s\n", $snap;
+    }
+    else {
+        printf "Want to delete %s\n", $snap;
+        $global_deleted++;
+    }
 }
 printf "Deleted %s global snapshots\n", $global_deleted;
 
