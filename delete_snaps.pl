@@ -33,7 +33,7 @@ my @stderr = <$chld_err>;
 waitpid($pid, 0);
 
 my @daily = sort { lc($a) cmp lc($b) } map { (split)[0] } grep { /^\d{8}-/ } @stdout;
-my @global = map { (split)[0] } grep { /^\Q$filesystem\E\./ } @stdout;
+my @global = sort { $a cmp $b } map { (split)[0] } grep { /^\Q$filesystem\E\./ } @stdout;
 
 my $date = UnixDate( DateCalc('today', "-$days days"), "%Y%m%d");
 
@@ -67,7 +67,7 @@ printf "Deleted %s daily snapshots\n", $daily_deleted;
 print "Deleting global snapshots\n";
 my $global_deleted = 0;
 
-# remove the last global
+# save the last global by removing it from the end of the list
 pop @global;
 
 foreach my $snap (@global) {
@@ -75,11 +75,16 @@ foreach my $snap (@global) {
         printf "Skipping %s\n", $snap;
     }
     else {
-        printf "Want to delete %s\n", $snap;
+        printf "Deleting %s\n", $snap;
+        system('mmdelsnapshot', $filesystem, $snap);
+        my $rc = $? >> 8;
+        printf "RC=%s\n", $rc;
         $global_deleted++;
     }
 }
 printf "Deleted %s global snapshots\n", $global_deleted;
 
 system('mmlspool', '--block-size', 'auto', $filesystem);
+
+printf "BUILDMSG: Deleted %s daily, %s global snapshots.\n", $daily_deleted, $global_deleted;
 
