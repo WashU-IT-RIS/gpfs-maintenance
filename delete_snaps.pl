@@ -74,14 +74,14 @@ foreach my $snap (@daily) {
 }
 printf "Deleted %s daily snapshots\n", $daily_deleted;
 
-my $global_total = scalar @global;
-
 print "Deleting global snapshots\n";
 my $global_deleted = 0;
 my $global_failed = 0;
 
 # save the last global by removing it from the end of the list
 pop @global;
+
+my $global_total = scalar @global;
 
 foreach my $snap (@global) {
     if ($notreally) {
