@@ -104,10 +104,16 @@ system('mmlspool', '--block-size', 'auto', $filesystem);
 
 printf "BUILDMSG: Deleted %s daily (%s failed), %s global snapshots (%s failed).\n", $daily_deleted, $daily_failed, $global_deleted, $global_failed;
 
-exit 0 if ( ($daily_total + $global_total) == 0 );      # there wasn't anything to delete
-exit 9 if ( ($daily_deleted + $global_deleted) == 0 );  # nothing got deleted
-exit 1 if $daily_total && ! $daily_deleted;             # no dailies got deleted
-exit 2 if $global_total && ! $global_deleted;           # no globals got deleted
+exit_with_code(0) if ( ($daily_total + $global_total) == 0 );      # there wasn't anything to delete
+exit_with_code(9) if ( ($daily_deleted + $global_deleted) == 0 );  # nothing got deleted
+exit_with_code(1) if $daily_total && ! $daily_deleted;             # no dailies got deleted
+exit_with_code(2) if $global_total && ! $global_deleted;           # no globals got deleted
 
 exit 0;
+
+sub exit_with_code {
+    my $rc = shift;
+    printf "Exiting RC=%s\n", $rc;
+    exit $rc;
+}
 
