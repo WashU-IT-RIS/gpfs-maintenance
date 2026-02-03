@@ -44,6 +44,7 @@ printf "Cutoff date is %s\n", $date;
 
 print "Deleting daily snapshots\n";
 my $daily_deleted = 0;
+my $daily_failed = 0;
 
 foreach my $snap (@daily) {
 
@@ -58,7 +59,12 @@ foreach my $snap (@daily) {
             system('mmdelsnapshot', $filesystem, sprintf("%s:%s", $fileset, $snap));
             my $rc = $? >> 8;
             printf "RC=%s\n", $rc;
-            $daily_deleted++;
+            if ($rc == 0) {
+              $daily_deleted++;
+            }
+            else {
+              $daily_failed++;
+            }
         }
     }
 }
@@ -66,6 +72,7 @@ printf "Deleted %s daily snapshots\n", $daily_deleted;
 
 print "Deleting global snapshots\n";
 my $global_deleted = 0;
+my $global_failed = 0;
 
 # save the last global by removing it from the end of the list
 pop @global;
@@ -79,12 +86,17 @@ foreach my $snap (@global) {
         system('mmdelsnapshot', $filesystem, $snap);
         my $rc = $? >> 8;
         printf "RC=%s\n", $rc;
-        $global_deleted++;
+        if ($rc == 0) {
+          $global_deleted++;
+        }
+        else {
+          $global_failed++;
+        }
     }
 }
 printf "Deleted %s global snapshots\n", $global_deleted;
 
 system('mmlspool', '--block-size', 'auto', $filesystem);
 
-printf "BUILDMSG: Deleted %s daily, %s global snapshots.\n", $daily_deleted, $global_deleted;
+printf "BUILDMSG: Deleted %s daily (%s failed), %s global snapshots (%s failed).\n", $daily_deleted, $daily_failed, $global_deleted, $global_failed;
 
