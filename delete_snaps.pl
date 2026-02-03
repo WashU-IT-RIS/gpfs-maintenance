@@ -46,13 +46,15 @@ print "Deleting daily snapshots\n";
 my $daily_deleted = 0;
 my $daily_failed = 0;
 
-my $daily_total = scalar @daily;
+my $daily_total = 0;
 
 foreach my $snap (@daily) {
 
     my ($snapdate, $fileset) = split /-/, $snap, 2;
 
     if ($snapdate lt $date) {
+        $daily_total++;
+
         if ($notreally) {
             printf "Skipping %s\n", $snap;
         }
