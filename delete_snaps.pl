@@ -46,6 +46,8 @@ print "Deleting daily snapshots\n";
 my $daily_deleted = 0;
 my $daily_failed = 0;
 
+my $daily_total = scalar @daily;
+
 foreach my $snap (@daily) {
 
     my ($snapdate, $fileset) = split /-/, $snap, 2;
@@ -69,6 +71,8 @@ foreach my $snap (@daily) {
     }
 }
 printf "Deleted %s daily snapshots\n", $daily_deleted;
+
+my $global_total = scalar @global;
 
 print "Deleting global snapshots\n";
 my $global_deleted = 0;
@@ -99,4 +103,11 @@ printf "Deleted %s global snapshots\n", $global_deleted;
 system('mmlspool', '--block-size', 'auto', $filesystem);
 
 printf "BUILDMSG: Deleted %s daily (%s failed), %s global snapshots (%s failed).\n", $daily_deleted, $daily_failed, $global_deleted, $global_failed;
+
+exit 0 if ( ($daily_total + $global_total) == 0 );      # there wasn't anything to delete
+exit 9 if ( ($daily_deleted + $global_deleted) == 0 );  # nothing got deleted
+exit 1 if $daily_total && ! $daily_deleted;             # no dailies got deleted
+exit 2 if $global_total && ! $global_deleted;           # no globals got deleted
+
+exit 0;
 
