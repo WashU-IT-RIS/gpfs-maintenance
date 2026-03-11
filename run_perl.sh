@@ -22,11 +22,9 @@ curl -fsSL https://cpanmin.us | perl - --local-lib="$PERL_PREFIX" App::cpanminus
 
 cpanm --notest --local-lib="$PERL_PREFIX" --installdeps .
 
-set -x
-
 SCRIPT=$1; shift
 
-perl -cw $1 || exit 13
+perl -cw $SCRIPT || exit 13
 
 exec perl $SCRIPT "$@"
 
