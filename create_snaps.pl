@@ -84,8 +84,8 @@ foreach my $fileset (@filesets) {
                 last TRY;
             }
             elsif ($rc == 17) {
-                # already a snapshot by that name, don't try again
-                $failed++;
+                # Already a snapshot by that name, don't try again.
+                # Not failed, but not created either.
                 last TRY;
             }
             else {
