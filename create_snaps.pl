@@ -62,7 +62,7 @@ foreach my $fileset (@filesets) {
 
         my $expiration = UnixDate( DateCalc('now', '+ 7 days'), '%Y-%m-%d-%H:%M');
 
-        printf "Creating %s to expire at %s\n", $snap, $expiration;
+        printf "Creating %s to expire %s\n", $snap, $expiration;
 
 # [root@rdcw-5-12-nsd1 ~]# mmcrsnapshot
 # mmcrsnapshot: Missing arguments.
