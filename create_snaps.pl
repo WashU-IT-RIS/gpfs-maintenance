@@ -83,6 +83,10 @@ foreach my $fileset (@filesets) {
                 $created++;
                 last TRY;
             }
+            elsif ($rc == 22) {
+                # snapshot not supported for this fileset
+                last TRY;
+            }
             elsif ($rc == 17) {
                 # Already a snapshot by that name, don't try again.
                 # Not failed, but not created either.
