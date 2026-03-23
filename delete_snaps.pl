@@ -79,7 +79,13 @@ my $global_deleted = 0;
 my $global_failed = 0;
 
 # save the last global by removing it from the end of the list
-pop @global;
+if (@global) {
+    printf "Found %s global snapshots.\n", scalar @global;
+
+    my $saving_global = pop @global;
+
+    printf "Removed %s from global list to save.\n", $saving_global;
+}
 
 my $global_total = scalar @global;
 
