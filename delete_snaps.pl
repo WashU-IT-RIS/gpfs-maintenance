@@ -110,8 +110,10 @@ printf "Deleted %s global snapshots\n", $global_deleted;
 
 system('mmlspool', '--block-size', 'auto', $filesystem);
 
-printf "BUILDMSG: Deleted %s/%s daily (%s failed), %s/%s global snapshots (%s failed).\n",
-    $daily_deleted, $daily_total, $daily_failed, $global_deleted, $global_total, $global_failed;
+my $free_space = $(mmlspool rdcw-fs1 --block-size auto | awk '$1=="SAS7K" {print $8}');
+
+printf "BUILDMSG: Deleted %s/%s daily (%s failed), %s/%s global snapshots (%s failed).  %s free.\n",
+    $daily_deleted, $daily_total, $daily_failed, $global_deleted, $global_total, $global_failed, $free_space;
 
 exit_with_code(0) if ( ($daily_total + $global_total) == 0 );      # there wasn't anything to delete
 exit_with_code(9) if ( ($daily_deleted + $global_deleted) == 0 );  # nothing got deleted
