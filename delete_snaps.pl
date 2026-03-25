@@ -110,7 +110,7 @@ printf "Deleted %s global snapshots\n", $global_deleted;
 
 system('mmlspool', '--block-size', 'auto', $filesystem);
 
-my $free_space = `mmlspool rdcw-fs1 --block-size auto | awk '\$1=="SAS7K" {print \$8}'`;
+my $free_space = `mmlspool $filesystem --block-size auto | awk '\$1=="SAS7K" {print \$8}'`;
 chomp $free_space;
 
 printf "BUILDMSG: Deleted %s/%s daily (%s failed), %s/%s global snapshots (%s failed).  %s free.\n",
