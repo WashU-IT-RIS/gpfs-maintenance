@@ -11,7 +11,7 @@ use strict;
 # parse command-line options
 my $filesystem;
 my $verbose;
-my $days = 21;
+my $days = 30;
 my $notreally = 0;
 GetOptions (
     "days=i"       => \$days,
