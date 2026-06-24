@@ -56,7 +56,7 @@ foreach my $fileset (shuffle @filesets) {
 
     my $snap = sprintf "%s-%s", formatted_date(), $fileset;
 
-    printf "Working on %s/%s (%s)\n", $counter, scalar @filesets, $fileset;
+    printf "Working on %s (%s/%s)\n", $fileset, $counter, scalar @filesets;
 
     if ($notreally) {
         printf "Skipping %s\n", $snap;
