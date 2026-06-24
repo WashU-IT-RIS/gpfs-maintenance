@@ -4,6 +4,7 @@ use Data::Dumper;
 use Date::Manip;
 use Getopt::Long;
 use IPC::Open3;
+use List::Util qw(shuffle);
 use Symbol 'gensym';
 
 use strict;
@@ -23,9 +24,7 @@ GetOptions (
 
 die "Specify filesystem with --filesystem" unless $filesystem;
 
-my $date = UnixDate('today', "%Y%m%d");
-
-printf "Today's date is %s\n", $date;
+printf "Today's date is %s\n", formatted_date();
 
 my $err;
 
@@ -50,10 +49,14 @@ system('mmlspool', '--block-size', 'auto', $filesystem);
 print "Creating daily snapshots\n";
 my $created = 0;
 my $failed = 0;
+my $counter = 0;
 
-foreach my $fileset (@filesets) {
+foreach my $fileset (shuffle @filesets) {
+    $counter++;
 
-    my $snap = "${date}-${fileset}";
+    my $snap = sprintf "%s-%s", formatted_date(), $fileset;
+
+    printf "Working on %s/%s (%s)\n", $counter, scalar @filesets, $fileset;
 
     if ($notreally) {
         printf "Skipping %s\n", $snap;
@@ -113,5 +116,9 @@ sub exit_with_code {
     my $rc = shift;
     printf "Exiting RC=%s\n", $rc;
     exit $rc;
+}
+
+sub formatted_date {
+    UnixDate('today', "%Y%m%d");
 }
 
