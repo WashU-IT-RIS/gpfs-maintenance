@@ -12,12 +12,13 @@ use strict;
 # parse command-line options
 my $filesystem;
 my $verbose;
-my $days = 8;
+my $days = 30;
 my $notreally = 0;
 my $tries = 3;
 GetOptions (
     "filesystem=s" => \$filesystem,
     "tries=i"      => \$tries,
+    "days=i"       => \$days,
     "verbose"      => \$verbose,
     "notreally"    => \$notreally,
     ) or die("Error in command line arguments\n");
@@ -63,7 +64,7 @@ foreach my $fileset (shuffle @filesets) {
     }
     else {
 
-        my $expiration = UnixDate( DateCalc('now', '+ 7 days'), '%Y-%m-%d-%H:%M');
+        my $expiration = UnixDate( DateCalc('now', "+ ${days} days"), '%Y-%m-%d-%H:%M');
 
         printf "Creating %s to expire %s\n", $snap, $expiration;
 
