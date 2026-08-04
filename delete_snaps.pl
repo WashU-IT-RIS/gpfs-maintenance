@@ -44,10 +44,10 @@ my @global = sort { $a cmp $b } map { (split)[0] } grep { /^\Q$filesystem\E\./ }
 
 $date ||= UnixDate( DateCalc('today', "-$days days"), "%Y%m%d");
 
-system('mmlspool', '--block-size', 'auto', $filesystem);
-
-printf "Days is %s\n", $days;
+printf "Days is %s\n", $days || 'not set';
 printf "Cutoff date is %s\n", $date;
+
+system('mmlspool', '--block-size', 'auto', $filesystem);
 
 print "Deleting daily snapshots\n";
 my $daily_deleted = 0;
