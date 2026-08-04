@@ -11,16 +11,23 @@ use strict;
 # parse command-line options
 my $filesystem;
 my $verbose;
-my $days = 30;
+my $days = 0;
+my $date = 0;
 my $notreally = 0;
 GetOptions (
     "days=i"       => \$days,
+    "date=i"       => \$date,
     "filesystem=s" => \$filesystem,
     "verbose"      => \$verbose,
     "notreally"    => \$notreally,
     ) or die("Error in command line arguments\n");
 
+die "Cannot specify both --days and --date" if ($days && $date);
+die "Date format should be 8 digits -- YYYYMMDD" if $date && $date !~ /^20\d{6}$/;
 die "Specify filesystem with --filesystem" unless $filesystem;
+
+# default to 30 days
+$days = 30 unless ($days || $date);
 
 my $err;
 
@@ -35,7 +42,7 @@ waitpid($pid, 0);
 my @daily = sort { lc($a) cmp lc($b) } map { (split)[0] } grep { /^\d{8}-/ } @stdout;
 my @global = sort { $a cmp $b } map { (split)[0] } grep { /^\Q$filesystem\E\./ } @stdout;
 
-my $date = UnixDate( DateCalc('today', "-$days days"), "%Y%m%d");
+$date ||= UnixDate( DateCalc('today', "-$days days"), "%Y%m%d");
 
 system('mmlspool', '--block-size', 'auto', $filesystem);
 
