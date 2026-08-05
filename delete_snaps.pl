@@ -31,6 +31,12 @@ $days = 30 unless ($days || $date);
 
 my $err;
 
+$date ||= UnixDate( DateCalc('today', "-$days days"), "%Y%m%d");
+
+printf "Days is %s\n", $days || 'not set';
+printf "Cutoff date is %s\n", $date;
+
+print "Getting snapshot list\n";
 my $pid = open3(my $chld_in, my $chld_out, my $chld_err = gensym,
     'mmlssnapshot', $filesystem);
 
@@ -42,11 +48,7 @@ waitpid($pid, 0);
 my @daily = sort { lc($a) cmp lc($b) } map { (split)[0] } grep { /^\d{8}-/ } @stdout;
 my @global = sort { $a cmp $b } map { (split)[0] } grep { /^\Q$filesystem\E\./ } @stdout;
 
-$date ||= UnixDate( DateCalc('today', "-$days days"), "%Y%m%d");
-
-printf "Days is %s\n", $days || 'not set';
-printf "Cutoff date is %s\n", $date;
-
+print "Getting pre-delete usage\n";
 system('mmlspool', '--block-size', 'auto', $filesystem);
 
 print "Deleting daily snapshots\n";
@@ -115,6 +117,7 @@ foreach my $snap (@global) {
 }
 printf "Deleted %s global snapshots\n", $global_deleted;
 
+print "Getting post-delete usage\n";
 system('mmlspool', '--block-size', 'auto', $filesystem);
 
 my $free_space = `mmlspool $filesystem --block-size auto | awk '\$1=="SAS7K" {print \$8}'`;
