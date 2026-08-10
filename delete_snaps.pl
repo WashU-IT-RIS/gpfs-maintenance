@@ -79,6 +79,7 @@ foreach my $snap (@daily) {
               $daily_failed++;
             }
         }
+        printf "Progress: %s\n", $daily_total;
     }
 }
 printf "Deleted %s daily snapshots\n", $daily_deleted;
