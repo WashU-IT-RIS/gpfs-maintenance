@@ -40,7 +40,7 @@ waitpid($pid, 0);
 my @filesets = sort { lc($a) cmp lc($b) } grep { /_active$/ } map { (split)[0] } @stdout;
 
 #print Dumper(\@filesets);
-print "Found %s filesets.\n", scalar @filesets;
+printf "Found %s filesets.\n", scalar @filesets;
 
 #my @daily = sort { lc($a) cmp lc($b) } map { (split)[0] } grep { /^\d{8}-/ } @stdout;
 #my @global = sort { $a cmp $b } map { (split)[0] } grep { /^\Q$filesystem\E\./ } @stdout;
