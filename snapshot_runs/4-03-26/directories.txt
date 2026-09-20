@@ -1,0 +1,5 @@
+/storage3/fs1/agelman/Active/ris_recovered_data_sept_18/recovered_from_snapshot/agelman/Active
+/storage3/fs1/arbarker/Active/ris_recovered_data_sept_18/recovered_from_snapshot/arbarker/Active
+/storage3/fs1/axelbaum/Active/ris_recovered_data_sept_18/recovered_from_snapshot/axelbaum/Active
+/storage3/fs1/b.a.rusconi/Active/ris_recovered_data_sept_18/recovered_from_snapshot/b.a.rusconi/Active
+/storage3/fs1/barosa/Active/ris_recovered_data_sept_18/recovered_from_snapshot/barosa/Active

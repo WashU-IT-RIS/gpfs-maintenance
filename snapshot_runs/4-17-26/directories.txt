@@ -1,0 +1,7 @@
+/storage3/fs1/bjuba/Active/ris_recovered_data_sept_18/recovered_from_snapshot/bjuba/Active
+/storage3/fs1/bmajor/Active/ris_recovered_data_sept_18/recovered_from_snapshot/bmajor/Active
+/storage3/fs1/botteronk/Active/ris_recovered_data_sept_18/recovered_from_snapshot/botteronk/Active
+/storage3/fs1/brestoff/Active/ris_recovered_data_sept_18/recovered_from_snapshot/brestoff/Active
+/storage3/fs1/brian.s.clark/Active/ris_recovered_data_sept_18/recovered_from_snapshot/brian.s.clark/Active
+/storage3/fs1/bsinopoli/Active/ris_recovered_data_sept_18/recovered_from_snapshot/bsinopoli/Active
+/storage3/fs1/bzhang29/Active/ris_recovered_data_sept_18/recovered_from_snapshot/bzhang29/Active
