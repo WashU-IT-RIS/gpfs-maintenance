@@ -1,8 +1,8 @@
-/storage3/fs1/dmullen/Active/ris_recovered_data_sept_18/recovered_from_Active/dmullen/Active
-/storage3/fs1/kmurphy/Active/ris_recovered_data_sept_18/recovered_from_Active/kmurphy/Active
-/storage3/fs1/lake.s/Active/ris_recovered_data_sept_18/recovered_from_Active/lake.s/Active
-/storage3/fs1/mcneillh/Active/ris_recovered_data_sept_18/recovered_from_Active/mcneillh/Active
-/storage3/fs1/mvahey/Active/ris_recovered_data_sept_18/recovered_from_Active/mvahey/Active
-/storage3/fs1/piston/Active/ris_recovered_data_sept_18/recovered_from_Active/piston/Active
-/storage3/fs1/songhu/Active/ris_recovered_data_sept_18/recovered_from_Active/songhu/Active
-/storage3/fs1/wyeoh/Active/ris_recovered_data_sept_18/recovered_from_Active/wyeoh/Active
+/storage1/fs1/dmullen/Active
+/storage1/fs1/kmurphy/Active
+/storage1/fs1/lake.s/Active
+/storage1/fs1/mcneillh/Active
+/storage1/fs1/mvahey/Active
+/storage1/fs1/piston/Active
+/storage1/fs1/songhu/Active
+/storage1/fs1/wyeoh/Active

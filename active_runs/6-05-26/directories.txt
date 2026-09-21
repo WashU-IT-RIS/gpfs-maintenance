@@ -1,4 +1,4 @@
-/storage3/fs1/wambachj/Active/ris_recovered_data_sept_18/recovered_from_Active/wambachj/Active
-/storage3/fs1/p.ruzycki/Active/ris_recovered_data_sept_18/recovered_from_Active/p.ruzycki/Active
-/storage3/fs1/eversa/Active/ris_recovered_data_sept_18/recovered_from_Active/eversa/Active
-/storage3/fs1/wilfleyd/Active/ris_recovered_data_sept_18/recovered_from_Active/wilfleyd/Active
+/storage1/fs1/wambachj/Active
+/storage1/fs1/p.ruzycki/Active
+/storage1/fs1/eversa/Active
+/storage1/fs1/wilfleyd/Active

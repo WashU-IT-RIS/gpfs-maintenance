@@ -1,6 +1,6 @@
-/storage3/fs1/mmokalled/Active/ris_recovered_data_sept_18/recovered_from_Active/mmokalled/Active
-/storage3/fs1/crickette.sanz/Active/ris_recovered_data_sept_18/recovered_from_Active/crickette.sanz/Active
-/storage3/fs1/d.goldfarb/Active/ris_recovered_data_sept_18/recovered_from_Active/d.goldfarb/Active
-/storage3/fs1/sheetsl/Active/ris_recovered_data_sept_18/recovered_from_Active/sheetsl/Active
-/storage3/fs1/gillandersw/Active/ris_recovered_data_sept_18/recovered_from_Active/gillandersw/Active
-/storage3/fs1/qingyunli/Active/ris_recovered_data_sept_18/recovered_from_Active/qingyunli/Active
+/storage1/fs1/mmokalled/Active
+/storage1/fs1/crickette.sanz/Active
+/storage1/fs1/d.goldfarb/Active
+/storage1/fs1/sheetsl/Active
+/storage1/fs1/gillandersw/Active
+/storage1/fs1/qingyunli/Active
