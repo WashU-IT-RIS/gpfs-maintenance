@@ -6,7 +6,9 @@ import sys
 from pathlib import Path
 
 
-def process_directory(source_dir: Path, dry_run: bool = False):
+def process_directory(
+    source_dir: Path, dry_run: bool = False, outfile_suffix: str = ""
+):
     if not source_dir.is_dir():
         print(f"Error: Source directory '{source_dir}' does not exist.")
         sys.exit(1)
@@ -45,7 +47,7 @@ def process_directory(source_dir: Path, dry_run: bool = False):
             # Extract base directory and suffix (e.g., 'Active', 'snapshot')
             dest_dir_path, folder_type = path_match.groups()  # aren't their 3 groups?
             dest_dir = Path(dest_dir_path)
-            dest_file_name = f"modified_files_{folder_type}.txt"
+            dest_file_name = f"modified_files_{folder_type}{"_" + outfile_suffix if len(outfile_suffix) else ""}.txt"
             dest_file_path = dest_dir / dest_file_name
 
             print(f"[PROCESSING] {out_file.name}")
@@ -79,9 +81,14 @@ def main():
         action="store_true",
         help="Simulate execution without creating directories or copying files",
     )
+    parser.add_argument(
+        "--outfile-suffix", help="String to append to end of outfiles (before .txt)"
+    )
 
     args = parser.parse_args()
-    process_directory(args.directory, dry_run=args.dry_run)
+    process_directory(
+        args.directory, dry_run=args.dry_run, outfile_suffix=args.outfile_suffix
+    )
 
 
 if __name__ == "__main__":
