@@ -14,7 +14,7 @@ set -uo pipefail
 # ==============================================================================
 # CONFIGURATION
 # ==============================================================================
-CUTOFF_DATE="2026-04-26 12:00:00"
+CUTOFF_DATE="2026-07-01 12:00:00"
 INPUT_FILE="directories.txt"
 
 # ==============================================================================
@@ -91,9 +91,8 @@ while IFS= read -r -d '' path; do
     # %W is the filesystem birth/creation time as epoch seconds.
     # %y is human readable modified time
     # GNU stat returns 0 when birth time is unavailable.
-    stat_out=$(stat --format='%W;%y' -- "$path")
-    birth_epoch=${stat_out%;*}
-    if [[ $birth_epoch -gt 0 ]]; then
+    if stat_out=$(stat --format='%W;%y' -- "$path"); then
+        birth_epoch=${stat_out%;*}
         if [[ $birth_epoch =~ ^[0-9]+$ ]] &&
            (( birth_epoch != 0 && birth_epoch > cutoff_epoch )); then
             created=1
