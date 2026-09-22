@@ -93,7 +93,7 @@ while IFS= read -r -d '' path; do
     # GNU stat returns 0 when birth time is unavailable.
     stat_out=$(stat --format='%W;%y' -- "$path")
     birth_epoch=${stat_out%;*}
-    if birth_epoch; then
+    if [[ $birth_epoch -gt 0 ]]; then
         if [[ $birth_epoch =~ ^[0-9]+$ ]] &&
            (( birth_epoch != 0 && birth_epoch > cutoff_epoch )); then
             created=1
