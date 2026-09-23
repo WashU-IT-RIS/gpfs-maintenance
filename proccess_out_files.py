@@ -47,7 +47,11 @@ def process_directory(
             # Extract base directory and suffix (e.g., 'Active', 'snapshot')
             dest_dir_path, folder_type = path_match.groups()  # aren't their 3 groups?
             dest_dir = Path(dest_dir_path)
-            dest_file_name = f"modified_files_{folder_type}{"_" + outfile_suffix if len(outfile_suffix) else ""}.txt"
+            
+            dest_name_a=f"modified_files_{folder_type}"
+            dest_name_b=f"_{outfile_suffix}" if len(outfile_suffix) else ""
+            dest_file_name = f"{dest_name_a}{dest_name_b}.txt"
+            
             dest_file_path = dest_dir / dest_file_name
 
             print(f"[PROCESSING] {out_file.name}")
