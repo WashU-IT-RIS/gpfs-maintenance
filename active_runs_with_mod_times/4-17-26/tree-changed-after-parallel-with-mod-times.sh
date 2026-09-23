@@ -7,7 +7,7 @@
 #SBATCH --cpus-per-task=1       # 1 CPU is sufficient for filesystem traversal
 #SBATCH --time=1-12:00:00       # Adjust based on the size of your allocations
 #SBATCH --partition=general-cpu
-#SBATCH --array=14             # Set this to 0-(N-1) where N is number of directories in your text file
+#SBATCH --array=0-14             # Set this to 0-(N-1) where N is number of directories in your text file
 
 set -uo pipefail
 
